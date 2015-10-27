@@ -4,18 +4,17 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.andover.jhuang.bouncey.view.MainScreenController">
    <children>
       <SplitPane dividerPositions="0.6438127090301003" prefHeight="400.0" prefWidth="600.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane fx:id="ballSpace" maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" SplitPane.resizableWithParent="false" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Slider layoutX="42.0" layoutY="173.0" />
-                  <TextArea layoutX="55.0" layoutY="66.0" prefHeight="26.0" prefWidth="99.0" />
+                  <Slider fx:id="speed" layoutX="42.0" layoutY="173.0" />
                   <Label layoutX="75.0" layoutY="43.0" text="Bounces" />
                   <Label layoutX="82.0" layoutY="139.0" text="Speed" />
+                  <Label fx:id="bounces" layoutX="85.0" layoutY="76.0" text="Label" />
                </children>
             </AnchorPane>
         </items>
