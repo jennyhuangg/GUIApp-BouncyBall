@@ -5,6 +5,7 @@ import java.io.IOException;
 import edu.andover.jhuang.bouncey.model.Ball;
 import edu.andover.jhuang.bouncey.model.BallEnvironment;
 import edu.andover.jhuang.bouncey.view.MainScreenController;
+import edu.andover.jhuang.bouncey.view.StartScreenController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,7 @@ public class MainApp extends Application {
 
         initRootLayout();
 
-        showScreen();
+        showStartScreen();
     }
     
  /**
@@ -53,13 +54,27 @@ public class MainApp extends Application {
         }
     }
     
-    public void initBallEnvironment() {
-    	
+    public void showStartScreen() {
+        try {
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/StartScreen.fxml"));
+            AnchorPane startScreen = (AnchorPane) loader.load();
+            
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(startScreen);
+            
+            StartScreenController controller = loader.getController();
+            controller.setMainApp(this);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     /**
      * Shows the person overview inside the root layout.
      */
-    public void showScreen() {
+    public void showMainScreen(int numBalls) {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -73,15 +88,13 @@ public class MainApp extends Application {
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
             
-            environment = new BallEnvironment(controller.getNumberOfBalls());
+            environment = new BallEnvironment(numBalls);
             Ball[] b = environment.getBalls();
             
             for (int i = 0; i < b.length; i++) {
                 mainScreen.getChildren().add(b[i]);
             }
-            
-            double width = controller.getWidth();
-            double height = controller.getHeight();
+
             Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e->
             environment.updatePositions(400, 
             		398, controller.getSpeed())));
