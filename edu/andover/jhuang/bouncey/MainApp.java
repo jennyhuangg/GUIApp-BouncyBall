@@ -150,16 +150,16 @@ public class MainApp extends Application {
 						MainScreenController controller, BorderPane rl) {
 		//if P key is pressed, change value of isPaused
 		rl.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-  	            public void handle(KeyEvent ke) {
-  	                if (ke.getCode() == KeyCode.P) {
-  	                	if (!isPaused) {
-  	                		isPaused = true;
-  	                	}
-  	                	else {
-  	                		isPaused = false;
-  	                	}
-  	                }
-  	            }
+			public void handle(KeyEvent ke) {
+                if (ke.getCode() == KeyCode.P) {
+                	if (!isPaused) {
+                		isPaused = true;
+                	}
+                	else {
+                		isPaused = false;
+                	}
+                }
+            }
   		 }
   		 );
 		

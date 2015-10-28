@@ -21,9 +21,6 @@ public class MainScreenController {
 
     @FXML
     private Slider speed;
-    
-    @FXML
-    private Label pauseLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -31,10 +28,11 @@ public class MainScreenController {
     public double getSpeed() {
     	return speed.getValue() + 0.01;
     }
+    
     public void setNumBouncesText(int n) {
     	bounces.setText("" + n);
     }
-    
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
