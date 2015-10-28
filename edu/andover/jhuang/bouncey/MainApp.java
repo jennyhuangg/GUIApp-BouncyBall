@@ -19,6 +19,8 @@ import javafx.util.Duration;
 /*
  * BouncyBall Main App
  * 
+ * BOUNCY_SOUND found on www.GRSites.com
+ * 
  * Jenny Huang
  * JavaFX Demo App
  * COMP-630: Software Design, Instructor: Dr. Miles
@@ -35,9 +37,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Bouncey");
-
         initRootLayout();
-
         showStartScreen();
     }
     
@@ -54,7 +54,6 @@ public class MainApp extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
-            
             primaryStage.show();
             
         } catch (IOException e) {
@@ -108,7 +107,7 @@ public class MainApp extends Application {
             
             //timeline that updates ball movement and animations
             double ballScreenWidth = 400.0;
-            double ballScreenLength = 398.0;
+            double ballScreenLength = 400.0;
         	Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e->
         		render(ballScreenWidth, ballScreenLength, controller.getSpeed(), 
         		controller)));
@@ -151,8 +150,7 @@ public class MainApp extends Application {
 		else {
 			environment.updatePositions(width, height, speed);
 			controller.setNumBouncesText(environment.getTotalNumBounces());
-		}
-			
+		}	
 	}
 	
     public static void main(String[] args) {

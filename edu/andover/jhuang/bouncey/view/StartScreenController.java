@@ -29,33 +29,24 @@ public class StartScreenController {
 	
     // Reference to the main application.
     private MainApp mainApp;
-
+    
+    @FXML
+    private void handleButtonAction() throws IOException {
+    	try {
+    		String s = numBalls.getText();
+			int n = Integer.parseInt(s);
+			mainApp.showMainScreen(n);
+		 } catch(IllegalArgumentException e) {
+			 error.setText("Please enter an integer.");
+		 }
+    }
+    
     /**
      * Is called by the main application to give a reference back to itself.
      * 
      * @param mainApp
      */
-    
-    @FXML
-    private void handleButtonAction() throws IOException {
-    	mainApp.showMainScreen(getNumBalls());
-    }
-    
-    public int getNumBalls() {
-    	String s = numBalls.getText();
-    	try {
-			int n = Integer.parseInt(s);
-			return n;
-			
-		 } catch(IllegalArgumentException e) {
-			 error.setText("Please enter an integer.");
-		 }
-    	
-    	return -1;
-    }
-    
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-
 }

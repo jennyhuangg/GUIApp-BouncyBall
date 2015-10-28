@@ -1,11 +1,8 @@
 package edu.andover.jhuang.bouncey.view;
 
+import edu.andover.jhuang.bouncey.MainApp;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
-
-import edu.andover.jhuang.bouncey.MainApp;
-import edu.andover.jhuang.bouncey.model.BallEnvironment;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
@@ -28,20 +25,10 @@ public class MainScreenController {
     
     @FXML
     private AnchorPane ballSpace;
-    
-    private BallEnvironment environment;
-    private int numBalls;
-    private int numTotalBounces;
 
     // Reference to the main application.
     private MainApp mainApp;
-
-    /**
-     * The constructor.
-     * The constructor is called before the initialize() method.
-     */
-
- 
+    
     public double getWidth() {
     	return ballSpace.getWidth();
     }
@@ -57,13 +44,7 @@ public class MainScreenController {
     	bounces.setText("" + n);
     }
     
-    /**
-     * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
-     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
-    
 }

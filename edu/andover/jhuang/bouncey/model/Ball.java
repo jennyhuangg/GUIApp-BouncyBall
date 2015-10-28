@@ -1,5 +1,6 @@
 package edu.andover.jhuang.bouncey.model;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
@@ -19,9 +20,9 @@ public class Ball extends Circle {
     private int numBounces; //0 if no bounce, 1 if bounce for that move
 
     public Ball(double x, double y, Color c) {
-      super(x,y,8,c);
-      dx = 1;
-      dy = 1;
+      super(x,y,12,c);
+      dx = 0;
+      dy = 0;
     }
     
     public double getDx() {
@@ -43,15 +44,16 @@ public class Ball extends Circle {
     public int getNumBounces() {
     	return numBounces;
     }
+    
     public void updateSpeed(double speed) {
     	if (dx < 0)
-    		dx = -1*speed/4.0;
+    		dx = -1*speed/3.0;
     	else
-    		dx = speed/4.0;
+    		dx = speed/3.0;
     	if (dy < 0)
-    		dy = -1*speed/4.0;
+    		dy = -1*speed/3.0;
     	else
-    		dy = speed/4.0;
+    		dy = speed/3.0;
     }
     
     public void moveBall(double width, double height) {
@@ -83,20 +85,9 @@ public class Ball extends Circle {
           dx *= -1;
         }
         numBounces++;
-      }     
-
+    	AudioClip BOUNCE_SOUND = new AudioClip("file:src/cartoon015.wav");
+        BOUNCE_SOUND.play();
+        
+      }    
     }
-    
-    public void moveBall2(double width, double height) {
-    	
-        setCenterX(dx + getCenterX());
-        setCenterY(dy + getCenterY());
-          if (getCenterX() <= getRadius() || getCenterX() >= width-getRadius()) {
-            dx *= -1;
-          }
-          if (getCenterY() <= getRadius() || getCenterY() >= height-getRadius()) {
-            dy *= -1;
-          } 
-
-   }
 }

@@ -1,7 +1,5 @@
 package edu.andover.jhuang.bouncey.model;
 
-import edu.andover.jhuang.bouncey.MainApp;
-import edu.andover.jhuang.bouncey.view.MainScreenController;
 import javafx.scene.paint.Color;
 
 /*
@@ -21,16 +19,20 @@ public class BallEnvironment {
 	public BallEnvironment(int n) {
 		balls = new Ball[n];
 		for (int i = 0; i < n; i++) {
-			int r = (int)(256*Math.random());
-			int g = (int)(256*Math.random());
-			int b = (int)(256*Math.random());
+			int r = (int)(150*Math.random())+106;
+			int g = (int)(150*Math.random())+106;
+			int b = (int)(150*Math.random())+106;
 			Color randomColor = Color.rgb(r,g,b);
-			balls[i] = new Ball(397*Math.random(),397*Math.random(),randomColor);
+			balls[i] = new Ball(350*Math.random()+20,350*Math.random()+20,randomColor);
 		}
 	}
 	
 	public Ball[] getBalls() {
 		return balls;
+	}
+	
+	public int getTotalNumBounces() {
+		return totalNumBounces;
 	}
 	
 	public void updatePositions(double width, double height, double speed) {
@@ -40,10 +42,4 @@ public class BallEnvironment {
 			totalNumBounces += balls[i].getNumBounces();
 		}
 	}
-	
-	public int getTotalNumBounces() {
-		return totalNumBounces;
-	}
-	
-
 }

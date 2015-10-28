@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -11,10 +12,19 @@
           <AnchorPane fx:id="ballSpace" maxHeight="400.0" maxWidth="400.0" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" SplitPane.resizableWithParent="false" />
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" SplitPane.resizableWithParent="false">
                <children>
-                  <Slider fx:id="speed" layoutX="42.0" layoutY="173.0" />
-                  <Label layoutX="75.0" layoutY="43.0" text="Bounces" />
-                  <Label layoutX="82.0" layoutY="139.0" text="Speed" />
-                  <Label fx:id="bounces" layoutX="85.0" layoutY="76.0" text="Label" />
+                  <Slider fx:id="speed" layoutX="25.0" layoutY="191.0" />
+                  <Label layoutX="65.0" layoutY="57.0" text="Bounces" textAlignment="CENTER">
+                     <font>
+                        <Font name="Futura Condensed Medium" size="21.0" />
+                     </font></Label>
+                  <Label layoutX="72.0" layoutY="158.0" prefHeight="26.0" prefWidth="40.0" text="Speed">
+                     <font>
+                        <Font name="Futura Condensed Medium" size="21.0" />
+                     </font></Label>
+                  <Label fx:id="bounces" layoutX="78.0" layoutY="87.0" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="Futura Condensed Medium" size="16.0" />
+                     </font></Label>
                </children>
             </AnchorPane>
         </items>
