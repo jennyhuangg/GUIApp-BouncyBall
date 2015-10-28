@@ -32,14 +32,22 @@ public class StartScreenController {
     
     @FXML
     private void handleButtonAction() throws IOException {
+		int upperLimit = 100;
+		int lowerLimit = 1;
     	try {
     		String s = numBalls.getText();
 			int n = Integer.parseInt(s);
-			mainApp.showMainScreen(n);
+
+			if (n >= lowerLimit && n <= upperLimit)
+				mainApp.showMainScreen(n);
+			else
+				error.setText("Enter an integer " + lowerLimit + "-" 
+						+ upperLimit + ".");
 			
 		 //error if text input is not an integer
 		 } catch(IllegalArgumentException e) {
-			 error.setText("Please enter an integer.");
+			 error.setText("Enter an integer " + lowerLimit + "-" 
+					 + upperLimit + ".");
 		 }
     }
     
