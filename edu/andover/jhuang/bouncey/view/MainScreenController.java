@@ -2,12 +2,22 @@ package edu.andover.jhuang.bouncey.view;
 
 import javafx.fxml.FXML;
 
+import java.io.IOException;
+
 import edu.andover.jhuang.bouncey.MainApp;
 import edu.andover.jhuang.bouncey.model.BallEnvironment;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 
+/*
+ * BouncyBall Main Screen Controller
+ * 
+ * Jenny Huang
+ * JavaFX Demo App
+ * COMP-630: Software Design, Instructor: Dr. Miles
+ * 27 October 2015
+ */
 
 public class MainScreenController {
 	@FXML
@@ -21,6 +31,7 @@ public class MainScreenController {
     
     private BallEnvironment environment;
     private int numBalls;
+    private int numTotalBounces;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -29,10 +40,8 @@ public class MainScreenController {
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public MainScreenController() {
 
-    }
-    
+ 
     public double getWidth() {
     	return ballSpace.getWidth();
     }
@@ -44,16 +53,8 @@ public class MainScreenController {
     public double getSpeed() {
     	return speed.getValue() + 0.01;
     }
-    public void getLabelText() {
-
-    }
-    
-    public void setNumberOfBalls(int n) {
-    	numBalls = n;
-    }
-    
-    public int getNumberOfBalls(int n) {
-    	return numBalls;
+    public void setNumBouncesText(int n) {
+    	bounces.setText("" + n);
     }
     
     /**

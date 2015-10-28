@@ -7,7 +7,6 @@ import edu.andover.jhuang.bouncey.model.BallEnvironment;
 import edu.andover.jhuang.bouncey.view.MainScreenController;
 import edu.andover.jhuang.bouncey.view.StartScreenController;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.animation.KeyFrame;
@@ -16,6 +15,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+/*
+ * BouncyBall Main App
+ * 
+ * Jenny Huang
+ * JavaFX Demo App
+ * COMP-630: Software Design, Instructor: Dr. Miles
+ * 27 October 2015
+ */
 
 public class MainApp extends Application {
 
@@ -71,44 +79,83 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+    
     /**
-     * Shows the person overview inside the root layout.
+     * Shows the main screen inside the root layout.
      */
     public void showMainScreen(int numBalls) {
         try {
-            // Load person overview.
+            // Load main screen.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/MainScreen.fxml"));
             AnchorPane mainScreen = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
+            // Set main screen into the center of root layout.
             rootLayout.setCenter(mainScreen);
             
             // Give the controller access to the main app.
             MainScreenController controller = loader.getController();
             controller.setMainApp(this);
             
+            //create new ball environment
             environment = new BallEnvironment(numBalls);
             Ball[] b = environment.getBalls();
             
+            //add balls to screen
             for (int i = 0; i < b.length; i++) {
                 mainScreen.getChildren().add(b[i]);
             }
-
-            Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e->
-            environment.updatePositions(400, 
-            		398, controller.getSpeed())));
-            tl.setCycleCount(Timeline.INDEFINITE);
-            tl.play();
-
             
+            //timeline that updates ball movement and animations
+            double ballScreenWidth = 400.0;
+            double ballScreenLength = 398.0;
+        	Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e->
+        		render(ballScreenWidth, ballScreenLength, controller.getSpeed(), 
+        		controller)));
+        	tl.setCycleCount(Timeline.INDEFINITE);
+        	tl.play();
+        	
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
+    /**
+     * Shows the end screen inside the root layout.
+     */
+    public void showEndScreen() {
+        try {
+            // Load end screen
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/EndScreen.fxml"));
+            AnchorPane endScreen = (AnchorPane) loader.load();
+            
+            // Set end screen into the center of root layout.
+            rootLayout.setCenter(endScreen);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }	
+    }
+   
+    // update positions or switch to end screen if at bounce limit
+	public void render(double width, double height, double speed, 
+						MainScreenController controller) {
+		int bounceLimit = 1000;
+		// switch to end screen when past bounce limit
+		if (environment.getTotalNumBounces() >= bounceLimit) {
+			showEndScreen();
+		}
+		
+		// update positions and total number of bounces
+		else {
+			environment.updatePositions(width, height, speed);
+			controller.setNumBouncesText(environment.getTotalNumBounces());
+		}
+			
+	}
+	
     public static void main(String[] args) {
         launch(args);
-
     }
 }

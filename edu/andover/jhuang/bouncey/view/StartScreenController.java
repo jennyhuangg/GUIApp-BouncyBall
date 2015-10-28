@@ -4,13 +4,18 @@ import java.io.IOException;
 
 import edu.andover.jhuang.bouncey.MainApp;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
+/*
+ * BouncyBall Start Screen Controller
+ * 
+ * Jenny Huang
+ * JavaFX Demo App
+ * COMP-630: Software Design, Instructor: Dr. Miles
+ * 27 October 2015
+ */
 
 public class StartScreenController {
 	@FXML
@@ -33,7 +38,7 @@ public class StartScreenController {
     
     @FXML
     private void handleButtonAction() throws IOException {
-    	mainApp.showMainScreen(3);
+    	mainApp.showMainScreen(getNumBalls());
     }
     
     public int getNumBalls() {

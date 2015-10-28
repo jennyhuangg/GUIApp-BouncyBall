@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="endScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="28.0" layoutY="114.0" text="YAY YOU REACHED 1000 BOUNCES!">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="143.0" layoutY="180.0" text="THE END" textFill="#0031c6">
+         <font>
+            <Font size="73.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
