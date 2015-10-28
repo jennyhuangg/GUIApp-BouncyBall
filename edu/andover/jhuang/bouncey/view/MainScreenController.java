@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
 
 /*
  * BouncyBall Main Screen Controller
@@ -24,18 +23,10 @@ public class MainScreenController {
     private Slider speed;
     
     @FXML
-    private AnchorPane ballSpace;
+    private Label pauseLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
-    
-    public double getWidth() {
-    	return ballSpace.getWidth();
-    }
-    
-    public double getHeight() {
-    	return ballSpace.getHeight();
-    }
     
     public double getSpeed() {
     	return speed.getValue() + 0.01;

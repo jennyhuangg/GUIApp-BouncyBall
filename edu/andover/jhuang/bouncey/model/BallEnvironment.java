@@ -22,8 +22,8 @@ public class BallEnvironment {
 			int r = (int)(150*Math.random())+106;
 			int g = (int)(150*Math.random())+106;
 			int b = (int)(150*Math.random())+106;
-			Color randomColor = Color.rgb(r,g,b);
-			balls[i] = new Ball(350*Math.random()+20,350*Math.random()+20,randomColor);
+			Color c = Color.rgb(r,g,b);
+			balls[i] = new Ball(350*Math.random()+20,350*Math.random()+20, c);
 		}
 	}
 	

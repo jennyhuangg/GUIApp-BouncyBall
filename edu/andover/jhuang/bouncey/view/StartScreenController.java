@@ -36,6 +36,8 @@ public class StartScreenController {
     		String s = numBalls.getText();
 			int n = Integer.parseInt(s);
 			mainApp.showMainScreen(n);
+			
+		 //error if text input is not an integer
 		 } catch(IllegalArgumentException e) {
 			 error.setText("Please enter an integer.");
 		 }

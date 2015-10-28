@@ -9,6 +9,9 @@ import edu.andover.jhuang.bouncey.view.StartScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +35,7 @@ public class MainApp extends Application {
 	private Stage primaryStage;
     private BorderPane rootLayout;
     private BallEnvironment environment;
+    private static boolean isPaused = false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -48,7 +52,8 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource(
+            		"view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
@@ -65,7 +70,8 @@ public class MainApp extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/StartScreen.fxml"));
+            loader.setLocation(MainApp.class.getResource(
+            		"view/StartScreen.fxml"));
             AnchorPane startScreen = (AnchorPane) loader.load();
             
             // Set person overview into the center of root layout.
@@ -86,9 +92,10 @@ public class MainApp extends Application {
         try {
             // Load main screen.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MainScreen.fxml"));
+            loader.setLocation(MainApp.class.getResource(
+            		"view/MainScreen.fxml"));
             AnchorPane mainScreen = (AnchorPane) loader.load();
-
+            
             // Set main screen into the center of root layout.
             rootLayout.setCenter(mainScreen);
             
@@ -110,7 +117,7 @@ public class MainApp extends Application {
             double ballScreenLength = 400.0;
         	Timeline tl = new Timeline(new KeyFrame(Duration.millis(100), e->
         		render(ballScreenWidth, ballScreenLength, controller.getSpeed(), 
-        		controller)));
+        		controller, rootLayout)));
         	tl.setCycleCount(Timeline.INDEFINITE);
         	tl.play();
         	
@@ -126,7 +133,8 @@ public class MainApp extends Application {
         try {
             // Load end screen
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/EndScreen.fxml"));
+            loader.setLocation(MainApp.class.getResource(
+            		"view/EndScreen.fxml"));
             AnchorPane endScreen = (AnchorPane) loader.load();
             
             // Set end screen into the center of root layout.
@@ -139,18 +147,38 @@ public class MainApp extends Application {
    
     // update positions or switch to end screen if at bounce limit
 	public void render(double width, double height, double speed, 
-						MainScreenController controller) {
-		int bounceLimit = 1000;
-		// switch to end screen when past bounce limit
-		if (environment.getTotalNumBounces() >= bounceLimit) {
-			showEndScreen();
-		}
+						MainScreenController controller, BorderPane rl) {
+		//if P key is pressed, change value of isPaused
+		rl.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+  	            public void handle(KeyEvent ke) {
+  	                if (ke.getCode() == KeyCode.P) {
+  	                	if (!isPaused) {
+  	                		isPaused = true;
+  	                	}
+  	                	else {
+  	                		isPaused = false;
+  	                	}
+  	                }
+  	            }
+  		 }
+  		 );
 		
-		// update positions and total number of bounces
+		if (isPaused) {
+			// pause simulation
+			return;
+		}
 		else {
-			environment.updatePositions(width, height, speed);
-			controller.setNumBouncesText(environment.getTotalNumBounces());
-		}	
+			int bounceLimit = 1000;
+			// switch to end screen when past bounce limit
+			if (environment.getTotalNumBounces() >= bounceLimit) {
+				showEndScreen();
+			}
+			// update positions and total number of bounces
+			else {
+				environment.updatePositions(width, height, speed);
+				controller.setNumBouncesText(environment.getTotalNumBounces());
+			}
+		}
 	}
 	
     public static void main(String[] args) {
