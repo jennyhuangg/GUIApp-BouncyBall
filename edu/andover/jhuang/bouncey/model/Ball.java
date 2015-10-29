@@ -15,12 +15,16 @@ import javafx.scene.shape.Circle;
 
 public class Ball extends Circle {
 
-    private double dx; //change in x position each move
+	private final double initialDx;
+	private final double initialDy;
+	private double dx; //change in x position each move
     private double dy; //change in y position each move
     private int numBounces; //0 if no bounce, 1 if bounce for that move
 
     public Ball(double x, double y, Color c) {
       super(x,y,12,c);
+      initialDx = Math.random();
+      initialDy = Math.sqrt(1 - initialDx*initialDx);
       dx = 0;
       dy = 0;
     }
@@ -47,19 +51,21 @@ public class Ball extends Circle {
     
     public void updateSpeed(double speed) {
     	if (dx < 0)
-    		dx = -1*speed/3.0;
+    		dx = -1*initialDx*speed/2.0;
     	else
-    		dx = speed/3.0;
+    		dx = initialDx*speed/2.0;
     	if (dy < 0)
-    		dy = -1*speed/3.0;
+    		dy = -1*initialDy*speed/2.0;
     	else
-    		dy = speed/3.0;
+    		dy = initialDy*speed/2.0;
     }
     
     public void moveBall(double width, double height) {
     	numBounces = 0;
-        setCenterX(getDx() + getCenterX());
-        setCenterY(getDy() + getCenterY());
+    	
+    	//move ball
+    	setCenterX(getDx() + getCenterX());
+    	setCenterY(getDy() + getCenterY());
    
           //while hits edge
 	      while(getCenterY()+getRadius()> height||getCenterY()-getRadius()<0||

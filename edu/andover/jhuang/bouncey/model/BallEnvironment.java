@@ -1,5 +1,5 @@
 package edu.andover.jhuang.bouncey.model;
-
+ 
 import javafx.scene.paint.Color;
 
 /*
